@@ -49,9 +49,9 @@ The design should reflect the brand and identity of WISY. Consider a clean, mode
 
 ### System dependencies
 
-`ruby '2.7.2'`
+`ruby '3.0.3'`
 
-`gem 'rails', '~> 6.0.2'`
+`gem 'rails', '~> 7.0.8'`
 
 `database: postgresql`
 
