@@ -57,7 +57,7 @@ The design should reflect the brand and identity of WISY. Consider a clean, mode
 
 ### Configuration
 
-`git clone https://github.com/allenonrails/event_board/`
+`git clone https://github.com/allenonrails/wisy/`
 
 `bundle install`
 
