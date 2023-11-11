@@ -57,9 +57,99 @@ class Slider {
   }
 }
 
+class InvestSlider {
+  constructor(data){
+    this.data = data
+    this.container  = document.querySelector('.invest-container');
+    this.navLinks   = this.container.querySelectorAll('.invest-navigation__item');
+    this.investItem = this.container.querySelector('.invest-item');
+
+    this.navLinks.forEach((navLink, index) => navLink.addEventListener('click', (e) => {
+      e.preventDefault()
+      
+      if(!navLink.classList.contains('invest-navigation__item-active')){
+        this.deleteAllActiveInvestNavLinks()
+        navLink.classList.add('invest-navigation__item-active')
+  
+        this.setCurrentItem(index)
+      }
+    }))
+  }
+
+  setCurrentItem(index){
+    let itemData = this.data[index];
+
+    this.investItem.innerHTML = ``
+
+    let investItemImage = document.createElement('img')
+    investItemImage.classList.add('invest-item__image', 'fade-in')
+    investItemImage.src = itemData.imageSrc
+    investItemImage.alt = `${itemData.title} ${index} image`
+
+    let investItemText = document.createElement('div')
+    investItemText.classList.add('invest-item__text')
+
+    let investItemTitle = document.createElement('h3')
+    investItemTitle.classList.add('invest-item__title', 'fade-in')
+    investItemTitle.innerText = itemData.title
+
+    let investItemDescription = document.createElement('p')
+    investItemDescription.classList.add('.invest-item__description', 'fade-in')
+    investItemDescription.innerText = itemData.description
+
+    let investItemBtn = document.createElement('a')
+    investItemBtn.src = itemData.btnLink
+    investItemBtn.innerText = itemData.btnText
+    investItemBtn.classList.add('invest-item__btn', 'btn', 'fade-in')
+
+    this.investItem.appendChild(investItemImage)
+
+    investItemText.appendChild(investItemTitle)
+    investItemText.appendChild(investItemDescription)
+    investItemText.appendChild(investItemBtn)
+
+    this.investItem.appendChild(investItemText)
+  }
+
+  deleteAllActiveInvestNavLinks(){
+    this.navLinks.forEach(el => el.classList.remove('invest-navigation__item-active'))
+  }
+}
+
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
+
+const investData = [
+  {
+    imageSrc: './img/invest/1.png',
+    title: 'Invest Easily 1',
+    description: 'Choose a ready-made strategy, such as «Bitcoin & Ethereum». Link your bank card. And select the frequency of replenishment, for example, 100 $ once a week.',
+    btnLink: './',
+    btnText: 'Get started'
+  },
+  {
+    imageSrc: './img/invest/1.png',
+    title: 'Invest Easily 2',
+    description: 'Choose a ready-made strategy, such as «Bitcoin & Ethereum». Link your bank card. And select the frequency of replenishment, for example, 100 $ once a week.',
+    btnLink: './',
+    btnText: 'Get started'
+  },
+  {
+    imageSrc: './img/invest/1.png',
+    title: 'Invest Easily 3',
+    description: 'Choose a ready-made strategy, such as «Bitcoin & Ethereum». Link your bank card. And select the frequency of replenishment, for example, 100 $ once a week.',
+    btnLink: './',
+    btnText: 'Get started'
+  },
+  {
+    imageSrc: './img/invest/1.png',
+    title: 'Invest Easily 4',
+    description: 'Choose a ready-made strategy, such as «Bitcoin & Ethereum». Link your bank card. And select the frequency of replenishment, for example, 100 $ once a week.',
+    btnLink: './',
+    btnText: 'Get started'
+  },
+];
 
 document.addEventListener('DOMContentLoaded', function(){
 
@@ -92,5 +182,6 @@ document.addEventListener('DOMContentLoaded', function(){
   animationHeroDescription()
   setCurrentPageActiveLink()
   const mySlider = new Slider('.guide-slider', '.guide-slide');
+  const investSlider = new InvestSlider(investData)
 })
 
