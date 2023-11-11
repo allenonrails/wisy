@@ -1,0 +1,163 @@
+/* Simple CSS Reset */
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+li {
+  list-style: none;
+}
+
+/* basic */
+
+:root {
+  --dark: #333;
+  --white: #fff;
+  --green: #2DBC83;
+}
+
+body {
+  background-color: var(--dark);
+}
+
+a {
+  text-decoration: none;
+  color: var(--white);
+}
+
+.container {
+  width: 100%;
+  max-width: 1400px; 
+  margin: 0 auto; 
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+/* fonts */
+
+@font-face {
+  font-family: 'SF Semi Bold';
+  src: url('../fonts/SFProText-Semibold.woff2') format('woff2'),
+      url('../fonts/SFProText-Semibold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Regular';
+  src: url('../fonts/SFProText-Regular.woff2') format('woff2'),
+      url('../fonts/SFProText-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+@font-face {
+  font-family: 'SF Medium';
+  src: url('../fonts/SFProText-Medium.woff2') format('woff2'),
+      url('../fonts/SFProText-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Pro Text';
+  src: url('../fonts/SFProText-Light.woff2') format('woff2'),
+      url('../fonts/SFProText-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Pro Text';
+  src: url('../fonts/SFProText-HeavyItalic.woff2') format('woff2'),
+      url('../fonts/SFProText-HeavyItalic.woff') format('woff');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Heavy';
+  src: url('../fonts/SFProText-Heavy.woff2') format('woff2'),
+      url('../fonts/SFProText-Heavy.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Bold';
+  src: url('../fonts/SFProText-Bold.woff2') format('woff2'),
+      url('../fonts/SFProText-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* animations */
+
+/* header */
+
+.header {
+  padding: 20px 0;
+}
+
+.header-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-logo {
+  display: inline-block;
+}
+
+.header-logo object {
+  pointer-events: none;
+  position: relative; 
+  z-index: -1
+}
+
+.header-menu {
+  display: flex;
+}
+
+.header-item:not(:last-child){
+  margin-right: 50px;
+}
+
+.header-item-link {
+  font-family: 'SF Semi Bold';
+  font-size: 24px;
+  transition: color 0.7s;
+}
+
+.header-item-link-active, .header-item-link:hover {
+  color: var(--green);
+}
