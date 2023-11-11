@@ -37,6 +37,10 @@ li {
   --green: #2DBC83;
 }
 
+body, html {
+  overflow-x: hidden;
+}
+
 a {
   text-decoration: none;
   color: var(--white);
@@ -44,6 +48,14 @@ a {
 
 img {
   max-width: 100%;
+}
+
+.section-title {
+  font-family: 'SF Bold';
+  font-size: 54px;
+  color: var(--dark);
+  text-align: center;
+  margin-bottom: 100px;
 }
 
 .container {
@@ -362,4 +374,69 @@ img {
   .hero-down {
     margin-top: 30px;
   }
+}
+
+/* guide */
+
+.guide {
+  padding-top: 100px;
+  background-color: var(--dark);
+}
+
+.guide-title  {
+  color: var(--white);
+}
+
+.guide-wrap{
+  display: flex;
+  justify-content: center;
+}
+
+.guide-slider {
+  transition: transform 0.3s ease;
+}
+
+.guide-block {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.guide-block:not(:last-child){
+  margin-right: 80px;
+}
+
+.guide-block:nth-child(2n){
+  flex-direction: column;
+}
+
+.guide-block__text {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.guide-block__number {
+  font-family: "SF Bold";
+  color: rgba(255, 255, 255, 0.80);
+  font-size: 120px;
+}
+
+.guide-block:nth-child(2n) .guide-block__number{
+  margin-bottom: -40px;
+  margin-left: -50px;
+}
+
+.guide-block:nth-child(2n-1) .guide-block__number{
+  margin-top: -50px;
+  margin-left: -40px;
+}
+
+.guide-block__title {
+  font-family: "SF Bold";
+  font-size: 24px; 
+  color: var(--white);
+}
+
+@media screen and (max-width: 768px) {
+
 }
