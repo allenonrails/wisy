@@ -32,13 +32,9 @@ li {
 /* basic */
 
 :root {
-  --dark: #333;
+  --dark: #2D313F;
   --white: #fff;
   --green: #2DBC83;
-}
-
-body {
-  background-color: var(--dark);
 }
 
 a {
@@ -74,6 +70,35 @@ img {
 .btn:hover {
   background: linear-gradient(225deg, #359D9E 5.53%, #55C595 94.47%);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.arrows {
+	width: 60px;
+	height: 72px;
+  position: relative;
+}
+
+.arrows path {
+	stroke: var(--white);
+	fill: transparent;
+	stroke-width: 2px;	
+	animation: arrow 2s infinite;
+	-webkit-animation: arrow 2s infinite; 
+}
+
+.arrows path.a1 {
+	animation-delay:-1s;
+	-webkit-animation-delay:-1s;
+}
+
+.arrows path.a2 {
+	animation-delay:-0.5s;
+	-webkit-animation-delay:-0.5s;
+}
+
+.arrows path.a3 {	
+	animation-delay:0s;
+	-webkit-animation-delay:0s;
 }
 
 /* fonts */
@@ -156,10 +181,27 @@ img {
   }
 }
 
+@keyframes arrow
+{
+0% {opacity:0}
+40% {opacity:1}
+80% {opacity:0}
+100% {opacity:0}
+}
+
+@-webkit-keyframes arrow /*Safari and Chrome*/
+{
+0% {opacity:0}
+40% {opacity:1}
+80% {opacity:0}
+100% {opacity:0}
+}
+
 /* header */
 
 .header {
   padding: 20px 0;
+  background-color: var(--dark);
 }
 
 .header-wrap {
@@ -175,7 +217,6 @@ img {
 .header-logo object {
   pointer-events: none;
   position: relative; 
-  z-index: -1
 }
 
 .header-menu {
@@ -199,8 +240,9 @@ img {
 /* hero */
 
 .hero {
-  margin-top: 60px;
+  padding-top: 60px;
   position: relative;
+  background-color: var(--dark);
 }
 
 .hero::after, .hero::before {
@@ -233,6 +275,10 @@ img {
   justify-content: space-around;
 }
 
+.hero-image {
+  margin-right: 30px;
+}
+
 .hero-text {
   display: flex;
   flex-direction: column;
@@ -257,4 +303,63 @@ img {
 
 .hero-btn {
   margin-top: 60px;
+}
+
+.hero-down {
+  display: block;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 768px) {
+  .header-item:not(:last-child){
+    margin-right: 20px;
+  }
+
+  .header-item-link {
+    font-size: 18px;
+  }
+
+  .hero-wrap {
+    flex-wrap: wrap;
+    text-align: center;
+  }
+  .hero-image {
+    max-width: 200px;
+    margin-right: 0;
+  }
+
+  .hero::after, .hero::before {
+    width: 322px;
+    height: 322px;
+    border-radius: 322px;
+    filter: blur(275px); 
+  }  
+
+  .hero::after {
+    top: 0;
+  }
+  
+  .hero::before {
+    top: 200px;
+    right: 0;
+  }
+
+  .hero-title {
+    margin-top: 20px;
+    font-size: 44px;
+  }
+
+  .hero-description {
+    font-size: 20px;
+  }
+
+  .hero-btn {
+    margin: 0 auto;
+    margin-top: 60px;
+    width: 200px;
+  }
+
+  .hero-down {
+    margin-top: 30px;
+  }
 }
