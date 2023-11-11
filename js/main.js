@@ -1,3 +1,62 @@
+class Slider {
+  constructor(containerSelector, slideSelector, breakPointSlider = 920, autoScrollSpeed = 200) {
+    this.sliderContainer = document.querySelector(containerSelector);
+    this.slides = document.querySelectorAll(slideSelector);
+    this.isDragging = false;
+    this.startPosition = 0;
+    this.currentTranslate = 0;
+    this.prevTranslate = 0;
+    this.autoScrollSpeed = autoScrollSpeed;
+    this.breakPointSlider = breakPointSlider;
+
+    this.isMobile = window.matchMedia(`(max-width: ${this.breakPointSlider}px)`).matches;
+
+    if (this.isMobile) {
+      this.currentTranslate = this.slides[0].offsetWidth * 2;
+      this.updateSliderPosition();
+
+      this.sliderContainer.addEventListener('touchstart', this.startScroll.bind(this));
+      this.sliderContainer.addEventListener('touchend', this.stopScroll.bind(this));
+      this.sliderContainer.addEventListener('touchmove', this.drag.bind(this));
+    }
+  }
+
+  startScroll(event) {
+    this.startPosition = event.touches[0].clientX;
+    this.isDragging = true;
+  }
+
+  drag(event) {
+    if (!this.isDragging) return;
+
+    const currentPosition = event.touches[0].clientX;
+
+    this.currentTranslate = this.prevTranslate + currentPosition - this.startPosition;
+
+    const minTranslate = 0;
+    const maxTranslate = -(this.slides.length - 1) * this.slides[0].offsetWidth;
+
+    if (this.currentTranslate > 0 && this.currentTranslate < this.slides[0].offsetWidth / 2) {
+      this.currentTranslate = minTranslate;
+    }
+
+    if (this.currentTranslate < maxTranslate && this.currentTranslate > maxTranslate - this.slides[0].offsetWidth / 2) {
+      this.currentTranslate = maxTranslate;
+    }
+
+    this.updateSliderPosition();
+  }
+
+  stopScroll() {
+    this.isDragging = false;
+    this.prevTranslate = this.currentTranslate;
+  }
+
+  updateSliderPosition() {
+    this.sliderContainer.style.transform = `translateX(${this.currentTranslate}px)`;
+  }
+}
+
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -32,61 +91,6 @@ document.addEventListener('DOMContentLoaded', function(){
 
   animationHeroDescription()
   setCurrentPageActiveLink()
+  const mySlider = new Slider('.guide-slider', '.guide-slide');
 })
-
-const sliderContainer = document.querySelector('.guide-slider');
-const slides = document.querySelectorAll('.guide-slide');
-let isDragging = false;
-let startPosition = 0;
-let currentTranslate = 0;
-let prevTranslate = 0;
-let autoScrollSpeed = 200;
-let breakPointSlider = 920;
-
-const isMobile = window.matchMedia(`(max-width: ${breakPointSlider}px)`).matches;
-
-if (isMobile) {
-  currentTranslate = slides[0].offsetWidth * 2;
-
-  updateSliderPosition();
-
-  sliderContainer.addEventListener('touchstart', startScroll);
-  sliderContainer.addEventListener('touchend', stopScroll);
-  sliderContainer.addEventListener('touchmove', drag);
-}
-
-function startScroll(event) {
-  startPosition = event.touches[0].clientX;
-  isDragging = true;
-}
-
-function drag(event) {
-  if (!isDragging) return;
-
-  const currentPosition = event.touches[0].clientX;
-
-  currentTranslate = prevTranslate + currentPosition - startPosition;
-
-  const minTranslate = 0;
-  const maxTranslate = -(slides.length - 1) * slides[0].offsetWidth;
-
-  if (currentTranslate > 0 && currentTranslate < slides[0].offsetWidth / 2) {
-    currentTranslate = minTranslate;
-  }
-
-  if (currentTranslate < maxTranslate && currentTranslate > maxTranslate - slides[0].offsetWidth / 2) {
-    currentTranslate = maxTranslate;
-  }
-
-  updateSliderPosition();
-}
-
-function stopScroll() {
-  isDragging = false;
-  prevTranslate = currentTranslate;
-}
-
-function updateSliderPosition() {
-  sliderContainer.style.transform = `translateX(${currentTranslate}px)`;
-}
 
