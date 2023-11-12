@@ -64,6 +64,8 @@ class InvestSlider {
     this.navLinks   = this.container.querySelectorAll('.invest-navigation__item');
     this.investItem = this.container.querySelector('.invest-item');
 
+    this.setCurrentItem(0)
+
     this.navLinks.forEach((navLink, index) => navLink.addEventListener('click', (e) => {
       e.preventDefault()
       
@@ -98,7 +100,7 @@ class InvestSlider {
     investItemDescription.innerText = itemData.description
 
     let investItemBtn = document.createElement('a')
-    investItemBtn.src = itemData.btnLink
+    investItemBtn.href = itemData.btnLink
     investItemBtn.innerText = itemData.btnText
     investItemBtn.classList.add('invest-item__btn', 'btn', 'fade-in')
 
@@ -219,28 +221,28 @@ const investData = [
     imageSrc: './img/invest/1.png',
     title: 'Invest Easily',
     description: 'Choose a ready-made strategy, such as «Bitcoin & Ethereum». Link your bank card. And select the frequency of replenishment, for example, 100 $ once a week.',
-    btnLink: './',
+    btnLink: 'https://t.me/wisy_eng_bot?start=wisy_e',
     btnText: 'Get started'
   },
   {
     imageSrc: './img/invest/2.png',
     title: 'Ready-Made Strategies',
     description: 'Choose a pre-made strategy and invest automatically, or create your own strategy in just a few clicks within the app.',
-    btnLink: './',
+    btnLink: 'https://t.me/wisy_eng_bot?start=wisy_e',
     btnText: 'Get started'
   },
   {
     imageSrc: './img/invest/3.png',
     title: 'Free Training',
     description: 'Learn to save and earn money on cryptocurrency. You will have access to 27 short courses in the form of cards. The average course learning time is 7 minutes.',
-    btnLink: './',
+    btnLink: 'https://t.me/wisy_eng_bot?start=wisy_e',
     btnText: 'Get started'
   },
   {
     imageSrc: './img/invest/4.png',
     title: 'Simple and stress-free',
     description: 'No need to speculateand exert a lot of effort to buy cryptocurrency.',
-    btnLink: './',
+    btnLink: 'https://t.me/wisy_eng_bot?start=wisy_e',
     btnText: 'Get started'
   },
 ];

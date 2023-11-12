@@ -1105,6 +1105,7 @@ img {
   width: 100%;
   max-width: 100%;
   border: none;
+  text-align: center;
 }
 
 @media screen and (max-width: 768px) {
