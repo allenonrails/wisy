@@ -217,29 +217,29 @@ function sleep(ms) {
 const investData = [
   {
     imageSrc: './img/invest/1.png',
-    title: 'Invest Easily 1',
+    title: 'Invest Easily',
     description: 'Choose a ready-made strategy, such as «Bitcoin & Ethereum». Link your bank card. And select the frequency of replenishment, for example, 100 $ once a week.',
     btnLink: './',
     btnText: 'Get started'
   },
   {
-    imageSrc: './img/invest/1.png',
-    title: 'Invest Easily 2',
-    description: 'Choose a ready-made strategy, such as «Bitcoin & Ethereum». Link your bank card. And select the frequency of replenishment, for example, 100 $ once a week.',
+    imageSrc: './img/invest/2.png',
+    title: 'Ready-Made Strategies',
+    description: 'Choose a pre-made strategy and invest automatically, or create your own strategy in just a few clicks within the app.',
     btnLink: './',
     btnText: 'Get started'
   },
   {
-    imageSrc: './img/invest/1.png',
-    title: 'Invest Easily 3',
-    description: 'Choose a ready-made strategy, such as «Bitcoin & Ethereum». Link your bank card. And select the frequency of replenishment, for example, 100 $ once a week.',
+    imageSrc: './img/invest/3.png',
+    title: 'Free Training',
+    description: 'Learn to save and earn money on cryptocurrency. You will have access to 27 short courses in the form of cards. The average course learning time is 7 minutes.',
     btnLink: './',
     btnText: 'Get started'
   },
   {
-    imageSrc: './img/invest/1.png',
-    title: 'Invest Easily 4',
-    description: 'Choose a ready-made strategy, such as «Bitcoin & Ethereum». Link your bank card. And select the frequency of replenishment, for example, 100 $ once a week.',
+    imageSrc: './img/invest/4.png',
+    title: 'Simple and stress-free',
+    description: 'No need to speculateand exert a lot of effort to buy cryptocurrency.',
     btnLink: './',
     btnText: 'Get started'
   },
