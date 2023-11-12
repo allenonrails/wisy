@@ -41,6 +41,7 @@ body, html {
   overflow-x: hidden;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
 }
 
 section {
@@ -1197,4 +1198,87 @@ img {
     margin: 0 auto;
     margin-bottom: 20px;
   }
+}
+
+/* hero-invest */
+
+.hero-invest {
+  padding-bottom: 100px;
+}
+
+.title-green {
+  color: var(--green);
+}
+
+/* total */
+
+.total-wrap {
+  position: relative;
+  z-index: 22;
+  display: flex;
+  justify-content: center;
+}
+
+.total-block {
+  cursor: pointer;
+  text-align: center;
+  padding: 40px 60px;
+  border-radius: 32px;
+  background-color: var(--white);
+  box-shadow: 8px 8px 24px 0px rgba(51, 51, 51, 0.15);
+  transition: .6s ease-in ;
+}
+
+.total-block:not(:last-child){
+  margin-right: 60px;
+}
+
+.total-block:hover .total-title{
+  color: #fff;
+}
+
+.total-block:hover {
+  background-color: var(--green);
+  color: #fff;
+  box-shadow: 8px 8px 24px 0px var(--green);
+}
+
+.total-title {
+  font-family: "SF Heavy";
+  color: var(--green);
+  font-size: 48px;
+}
+
+.total-description {
+  margin-top: 12px;
+  font-family: "SF Medium";
+  font-size: 24px;
+}
+
+@media screen and (max-width: 920px) {
+  .total-wrap {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .total-block:not(:last-child){
+    margin-right: 0;
+    margin-bottom: 30px;
+  }
+  
+  .total-block {
+    width: 100%;
+    max-width: 500px;
+  }
+}
+
+@media screen and (max-width: 687px) {
+  .total-title {
+    font-size: 32px;
+  }
+  
+  .total-description {
+    font-size: 18px;
+  }
+  
 }

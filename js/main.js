@@ -338,5 +338,6 @@ document.addEventListener('DOMContentLoaded', function(){
   const investSlider = new InvestSlider(investData)
   const elementCircle = new ElementCircle("circle-1", circleData[0], 1200);
   const elementSecondCircle = new ElementCircle("circle-2", circleData[1], 800);
+
 })
 
