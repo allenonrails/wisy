@@ -116,6 +116,100 @@ class InvestSlider {
   }
 }
 
+class ElementCircle {
+  constructor(circleId, data, circleSize=1000, elementSize=150) {
+    this.circle = document.getElementById(circleId);
+    this.circleSize = circleSize;
+    this.elementSize = elementSize;
+    this.data = data;
+    this.elements = [];
+
+    this.initCircle();
+    this.updateSizes(); // Вызываем метод для установки размеров при загрузке страницы
+  }
+
+  initCircle() {
+    this.circle.style.width = `${this.circleSize}px`;
+    this.circle.style.height = `${this.circleSize}px`;
+
+    // Добавляем внутренний круг
+    const innerCircle = document.createElement("div");
+    innerCircle.className = "inner-circle";
+    this.circle.appendChild(innerCircle);
+
+    this.data.forEach((dataCircle, i) => {
+      let element = document.createElement("div");
+      let image   = document.createElement('img');
+      let title   = document.createElement('h4')
+
+      image.src = dataCircle.imageSrc
+      image.alt = dataCircle.imageAlt
+
+      title.innerText = dataCircle.title
+      title.classList.add('element-title')
+
+      element.className = "element";
+      element.style.width = `${this.elementSize}px`
+      element.style.height = `${this.elementSize}px`
+
+      element.appendChild(image)
+      element.appendChild(title)
+      element.style.animationDelay = `${(i / this.data.length) * 5}s`;
+      this.circle.appendChild(element);
+      this.elements.push(element);
+    })
+
+    this.positionElements();
+  }
+
+  positionElements() {
+    this.elements.forEach((element, index) => {
+      const angle = (360 / this.data.length) * index;
+      const x = this.circleSize / 2 + (this.circleSize / 2) * Math.cos(this.toRadians(angle));
+      const y = this.circleSize / 2 + (this.circleSize / 2) * Math.sin(this.toRadians(angle));
+
+      element.style.left = `${x - this.elementSize / 2}px`;
+      element.style.top = `${y - this.elementSize / 2}px`;
+    });
+  }
+
+  updateSizes() {
+    const screenWidth = window.innerWidth;
+
+    if (screenWidth <= 1228) {
+      this.circleSize /= 1.5;
+      this.elementSize /= 1.5;
+    }
+
+    if (screenWidth <= 676) {
+      this.circleSize /= 2.2;
+      this.elementSize /= 2.2;
+    }
+
+    if (screenWidth <= 380) {
+      this.circleSize -= 70;
+      this.elementSize -= 30;
+    }
+    
+
+    // Обновляем размеры кругов
+    this.circle.style.width = `${this.circleSize}px`;
+    this.circle.style.height = `${this.circleSize}px`;
+
+    // Обновляем размеры элементов
+    this.elements.forEach((element) => {
+      element.style.width = `${this.elementSize}px`;
+      element.style.height = `${this.elementSize}px`;
+    });
+
+    this.positionElements();
+  }
+
+  toRadians(degrees) {
+    return degrees * (Math.PI / 180);
+  }
+}
+
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -151,6 +245,63 @@ const investData = [
   },
 ];
 
+const circleData = [
+  [
+    {
+      imageSrc: "./img/grow/1.png", 
+      imageAlt: "Top-10 market logo",
+      title: "Top-10 market"
+    },
+    {
+      imageSrc: "./img/grow/2.png", 
+      imageAlt: "Top DeFi logo",
+      title: "Top DeFi"
+    },
+    {
+      imageSrc: "./img/grow/3.png", 
+      imageAlt: "Mem-index logo",
+      title: "Mem-index"
+    },
+    {
+      imageSrc: "./img/grow/4.png", 
+      imageAlt: "Top-3 market logo",
+      title: "Top-3 market"
+    },
+    {
+      imageSrc: "./img/grow/9.png", 
+      imageAlt: "Only Bitcoin logo",
+      title: "Only Bitcoin"
+    },
+  ],
+  [
+    {
+      imageSrc: "./img/grow/5.png", 
+      imageAlt: "POW-index logo",
+      title: "POW-index"
+    },
+    {
+      imageSrc: "./img/grow/6.png", 
+      imageAlt: "BTC & ETH logo",
+      title: "BTC & ETH"
+    },
+    {
+      imageSrc: "./img/grow/7.png", 
+      imageAlt: "L2-index logo",
+      title: "L2-index"
+    },
+    {
+      imageSrc: "./img/grow/8.png", 
+      imageAlt: "Only Ethereum logo",
+      title: "Only Ethereum market"
+    },
+    {
+      imageSrc: "./img/grow/10.png", 
+      imageAlt: "POS-index logo",
+      title: "POS-index market"
+    },
+  ],
+]
+
 document.addEventListener('DOMContentLoaded', function(){
 
   function setCurrentPageActiveLink(){
@@ -183,5 +334,7 @@ document.addEventListener('DOMContentLoaded', function(){
   setCurrentPageActiveLink()
   const mySlider = new Slider('.guide-slider', '.guide-slide');
   const investSlider = new InvestSlider(investData)
+  const elementCircle = new ElementCircle("circle-1", circleData[0], 1200);
+  const elementSecondCircle = new ElementCircle("circle-2", circleData[1], 800);
 })
 
