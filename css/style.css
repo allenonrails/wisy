@@ -1042,3 +1042,103 @@ img {
     padding: 20px;
   }
 }
+
+/* subscribe */
+
+.subscribe-wrap {
+  display: flex;
+  align-items: center;
+  border-radius: 32px;
+  padding: 60px;
+  border: 1px solid #F2F2F2;
+  background: var(--white);
+  box-shadow: 4px 4px 16px 0px rgba(51, 51, 51, 0.15);
+  font-family: "SF Medium";
+}
+
+.subscribe-text {
+  margin-right: 40px;
+}
+
+.subscribe-image, .subscribe-text {
+  width: 100%;
+}
+
+.subscribe-title {
+  font-family: "SF Bold";
+  font-size: 38px;
+  margin-bottom: 20px;
+}
+
+.subscribe-description {
+  font-size: 20px;
+  margin-bottom: 40px;
+}
+
+.subscribe-field:not(:last-child) {
+  margin-bottom: 40px;
+}
+
+.subscribe-label {
+  display: block;
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+.subscribe-input {
+  border-radius: 16px;
+  border: 3px solid #828282;
+  background: var(--white);
+  display: block;
+  width: 100%;
+  padding: 27px;
+  font-family: "SF Regular";
+  font-size: 20px;
+  outline: none;
+}
+
+.subscribe-btn  {
+  cursor: pointer;
+  color: var(--white);
+  font-size: 24px;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  border: none;
+}
+
+@media screen and (max-width: 768px) {
+  .subscribe-wrap {
+    flex-wrap: wrap;
+    padding: 30px 20px;
+  }
+  .subscribe-text {
+    margin-right: 0;
+  }
+  .subscribe-title {
+    font-size: 28px;
+  }
+  
+  .subscribe-description {
+    font-size: 16px;
+  }
+  
+  .subscribe-field:not(:last-child) {
+    margin-bottom: 20px;
+  }
+  
+  .subscribe-label {
+    font-size: 18px;
+  }
+  
+  .subscribe-input {
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  .subscribe-btn  {
+    font-size: 16px;
+    padding: 10px;
+    margin-bottom: 30px;
+  }
+}
