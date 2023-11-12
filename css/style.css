@@ -1142,3 +1142,58 @@ img {
     margin-bottom: 30px;
   }
 }
+
+/* footer */
+
+.footer {
+  margin-top: 100px;
+}
+
+.footer-wrap {
+  margin-top: 40px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.footer-links {
+  display: flex;
+}
+
+.footer-allrights, .footer-link {
+  font-family: "SF Regular";
+  color: #828282;
+  font-size: 18px; 
+  margin-bottom: 15px;
+  display: block;
+  text-align: center;
+}
+
+.footer-link {
+  transition: .6s ease-in-out;
+}
+
+.footer-link:hover {
+  color: var(--white);
+}
+
+.footer-link:not(:last-child){
+  margin-right: 24px;
+}
+
+@media screen and (max-width: 567px) {
+  .footer-link:not(:last-child){
+    margin-right: 0;
+  }
+  .footer-link {
+    display: inline-block;
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+  }
+  .footer-allrights {
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 20px;
+  }
+}
