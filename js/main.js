@@ -314,9 +314,6 @@ document.addEventListener('DOMContentLoaded', function(){
       let containerBtn = copyBtn.closest('.legal-content');
 
       let allContent = await getAllContent(containerBtn);
-
-      console.log(allContent) 
-
       await navigator.clipboard.writeText(allContent)
     })
   })

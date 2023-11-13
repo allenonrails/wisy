@@ -79,6 +79,12 @@ img {
   box-sizing: border-box;
 }
 
+@media screen and (max-width: 676px) {
+  .container {
+    padding: 0 12px;
+  }
+}
+
 .btn {
   display: block;
   text-transform: uppercase;
@@ -944,11 +950,7 @@ img {
   }
 
   .element-title {
-    width: 80px;
-    border-radius: 5px;
-    color: var(--white);
-    background-color: var(--dark);
-    font-size: 10px;
+    display: none;
   }
   
 }

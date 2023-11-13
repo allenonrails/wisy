@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html
+    lang="ru"
+>
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="./css/summit.css" rel="stylesheet">
+          
+    <title>Wisy | Save, invest and learn from one easy app</title>
+
+                            
+  </head>
+  <body
+    data-master-user-utm
+    data-master-user-data
+      >
+
+                            
+    <main id="app">
+      <!-- sections -->
+                        <div class="s-summit-promo-v0">
+  <div class="inner">
+
+    <div class="content">
+
+      <div class="c-text-group v-summit">
+        <div class="subtitle">
+          Save, invest and learn from one easy app
+        </div>
+        <div class="title">
+          Wisy
+        </div>
+        <div class="text">
+          <p>
+            <span>Fully automated cryptocurrency investing</span> —
+            straight from your bank account.
+            Simple, profitable and safe.
+          </p>
+        </div>
+      </div>
+  
+      <div class="button-slot">
+        <button
+          @click="scrollTo('summit-form')"
+          class="c-button v-summit"
+        >
+          Get materials
+        </button>
+      </div>
+
+    </div>
+
+    <div class="art">
+      <!-- cover -->
+      <img
+        class="cover"
+        src="./img/summit/cover.jpg"
+      >
+      <!-- stars -->
+      <img
+        class="star v1 v-normal"
+        src="./img/summit/star.svg"
+      >
+      <img
+        class="star v2 v-mini"
+        src="./img/summit/star.svg"
+      >
+      <img
+        class="star v3 v-large"
+        src="./img/summit/star.svg"
+      >
+      <img
+        class="star v4 v-large"
+        src="./img/summit/star.svg"
+      >
+      <img
+        class="star v5 v-normal"
+        src="./img/summit/star.svg"
+      >
+      <img
+        class="star v6 v-mini"
+        src="./img/summit/star.svg"
+      >
+      <!-- coins -->
+      <img
+        class="coin v1"
+        src="./img/summit/coin-1.png"
+      >
+      <img
+        class="coin v2"
+        src="./img/summit/coin-2.png"
+      >
+    </div>
+
+    <img
+        class="cover-mobile"
+        src="./img/summit/cover-mobile.jpg"
+      >
+
+  </div>
+</div>
+                  <div class="s-summit-form-v0">
+  <div class="inner">
+
+    <div
+      ref="summit-form"
+      class="content"
+    >
+
+      <div class="title">
+        Fill out the form to receive materials
+      </div>
+
+      <div class="form">
+
+        <div class="field-group">
+          <label for="name" class="required">Name</label>
+          <input
+            v-model="name"
+            id="name"
+            type="text"
+            placeholder="John Doe"
+            required
+          >
+        </div>
+
+        <div class="field-group">
+          <label for="phone" class="required">Contact phone number</label>
+          <input
+            v-model="phone"
+            id="phone"
+            type="text"
+            placeholder="(123) 123-4567"
+            required
+          >
+        </div>
+
+        <div class="field-group">
+          <label for="email" class="required">E-Mail</label>
+          <input
+            v-model="email"
+            id="email"
+            type="email"
+            placeholder="example@mail.com"
+            required
+          >
+        </div>
+
+        <div
+          v-if="showError"
+          class="error"
+        >
+          Please fill in all the fields of the form and try again.
+        </div>
+
+        <div class="button-slot">
+          <button
+            @click="sendData()"
+            :disabled="loader"
+            class="c-button v-summit"
+          >
+              <span v-if="loader">Please wait</span>
+              <span v-else>Send data</span>
+          </button>
+          <div class="info">
+            to Telegram Bot
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <img
+      class="cover"
+      src="./img/summit/cover.jpg"
+    >
+
+  </div>
+</div>
+                  </main>
+
+    <!-- vendor scripts -->
+                  <script src="./js/summit/vue.js" charset="utf-8"></script>
+              <script src="./js/summit/summit.js" charset="utf-8"></script>
+          
+    <!-- sections scripts -->
+                                          
+  </body>
+</html>
