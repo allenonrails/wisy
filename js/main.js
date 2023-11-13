@@ -146,6 +146,7 @@ class ElementCircle {
 
       image.src = dataCircle.imageSrc
       image.alt = dataCircle.imageAlt
+      image.loading = "lazy"
 
       title.innerText = dataCircle.title
       title.classList.add('element-title')
@@ -305,6 +306,26 @@ const circleData = [
 ]
 
 document.addEventListener('DOMContentLoaded', function(){
+  console.log(navigator.clipboard)
+  let copyBtns = document.querySelectorAll('.legal-copy');
+
+  copyBtns.forEach(copyBtn => {
+    copyBtn.addEventListener('click', async function(){
+      let containerBtn = copyBtn.closest('.legal-content');
+
+      let allContent = await getAllContent(containerBtn);
+
+      console.log(allContent) 
+
+      await navigator.clipboard.writeText(allContent)
+    })
+  })
+
+  async function getAllContent(container){
+    result = Array.from( await container.querySelectorAll('.legal-text')).map(p => p.textContent).join('\n')
+
+    return result
+  }
 
   function setCurrentPageActiveLink(){
     let currentPage = `.${window.location.pathname}`;
