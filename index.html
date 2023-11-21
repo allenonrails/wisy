@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="./css/main.css?v=1.0">
   <title>Wisy</title>
 </head>
 <body>
@@ -16,10 +16,17 @@
           </object>
         </a>
         <nav class="header-menu">
-          <li class="header-item"><a href="./" class="header-item-link">Main</a></li>
-          <li class="header-item"><a href="./investors" class="header-item-link">Investors</a></li>
-          <li class="header-item"><a href="./aml" class="header-item-link">Legal</a></li>
+          <li class="header-item"><a href="./" class="header-item-link change-language-mainLink">Main</a></li>
+          <li class="header-item"><a href="./investors" class="header-item-link change-language-investorsLink">Investors</a></li>
+          <li class="header-item"><a href="./aml" class="header-item-link change-language-legalLink">Legal</a></li>
         </nav>
+        <div class="header-select">
+          <object id="langSvg" type="image/svg+xml" data="./img/lang.svg" width="30" height="30">
+            Your browser does not support SVG
+          </object>
+          <select class="select-langugage">
+          </select>
+        </div>
       </div>
     </div>
   </header>
@@ -31,11 +38,11 @@
           <img src="./img/hero.png" loading="lazy" alt="hero image wisy mobile app">
         </div>
         <div class="hero-text">
-          <h1 class="hero-title">Helps you <br> save & invest</h1>
+          <h1 class="hero-title change-language-title">Helps you <br> save & invest</h1>
           <p class="hero-description">
             Fully automated cryptocurrency investing — straight from your bank account. Simple, profitable and safe.
           </p>
-          <a href="https://t.me/wisy_eng_bot?start=wisy_e" class="hero-btn btn">Get started</a>
+          <a href="https://t.me/wisy_eng_bot?start=wisy_e" class="hero-btn btn change-language-btn">Get started</a>
         </div>
       </div>
       <div class="hero-down">
@@ -50,12 +57,12 @@
 
   <section class="guide">
     <div class="container">
-      <h2 class="guide-title section-title">Built by investors, <br> for investors</h2>
+      <h2 class="guide-title section-title change-language-guideTitle">Built by investors, <br> for investors</h2>
       <div class="guide-wrap guide-slider">
         <div class="guide-block guide-slide">
           <div class="guide-block__text">
             <span class="guide-block__number">1</span>
-            <h3 class="guide-block__title">Choosing a strategy</h3>
+            <h3 class="guide-block__title change-language-guideBlock1">Choosing a strategy</h3>
           </div>
           <div class="guide-block__image">
             <image src="./img/guide/1.png" loading="lazy" alt="guide about 1"></image>
@@ -64,7 +71,7 @@
         <div class="guide-block guide-slide">
           <div class="guide-block__text">
             <span class="guide-block__number">2</span>
-            <h3 class="guide-block__title">Description of the strategy</h3>
+            <h3 class="guide-block__title change-language-guideBlock2">Description of the strategy</h3>
           </div>
           <div class="guide-block__image">
             <image src="./img/guide/2.png" loading="lazy" alt="guide about 2"></image>
@@ -73,7 +80,7 @@
         <div class="guide-block guide-slide">
           <div class="guide-block__text">
             <span class="guide-block__number">3</span>
-            <h3 class="guide-block__title">Frequency and amount of top-up</h3>
+            <h3 class="guide-block__title change-language-guideBlock3">Frequency and amount of top-up</h3>
           </div>
           <div class="guide-block__image">
             <image src="./img/guide/3.png" loading="lazy" alt="guide about 3"></image>
@@ -82,7 +89,7 @@
         <div class="guide-block guide-slide">
           <div class="guide-block__text">
             <span class="guide-block__number">4</span>
-            <h3 class="guide-block__title">Linking a bank card</h3>
+            <h3 class="guide-block__title change-language-guideBlock4">Linking a bank card</h3>
           </div>
           <div class="guide-block__image">
             <image src="./img/guide/4.png" loading="lazy" alt="guide about 4"></image>
@@ -94,28 +101,32 @@
 
   <section class="invest">
     <div class="container">
-      <h2 class="invest-title section-title">Save, invest and learn from one easy app</h2>
+      <h2 class="invest-title section-title change-language-investTitle">Save, invest and learn from one easy app</h2>
       <div class="invest-container">
         <div class="invest-navigation">
           <div class="invest-navigation__item invest-navigation__item-active">
             <object type="image/svg+xml" data="./img/invest/nav-1.svg">
               Your browser does not support SVG
             </object>
+            <h4 class="invest-navigation__text change-language-guideNav1">Invest</h4>
           </div>
           <div class="invest-navigation__item">
             <object type="image/svg+xml" data="./img/invest/nav-2.svg">
               Your browser does not support SVG
             </object>
+            <h4 class="invest-navigation__text change-language-guideNav2">Strategy</h4>
           </div>
           <div class="invest-navigation__item">
             <object type="image/svg+xml" data="./img/invest/nav-3.svg">
               Your browser does not support SVG
             </object>
+            <h4 class="invest-navigation__text change-language-guideNav3">Courses</h4>
           </div>
           <div class="invest-navigation__item">
             <object type="image/svg+xml" data="./img/invest/nav-4.svg">
               Your browser does not support SVG
             </object>
+            <h4 class="invest-navigation__text change-language-guideNav4">Simple</h4>
           </div>
         </div>
         <div class="invest-item">
@@ -126,29 +137,29 @@
 
   <section class="reason">
     <div class="container">
-      <h2 class="reason-title section-title">
+      <h2 class="reason-title section-title change-language-reasonTitle">
         Your safe and trusted crypto app
       </h2>
       <div class="reason-wrap">
         <div class="reason-block">
           <div class="reason-content">
             <span class="reason-number">1</span>
-            <h3 class="reason-sub-title">Secure asset storage</h3>
-            <p class="reason-description">Industry-leading encryption and storage systems to ensure that your assets are always safe and secure.</p>
+            <h3 class="reason-sub-title change-language-reasonSub1">Secure asset storage</h3>
+            <p class="reason-description change-language-reasonDescription1">Industry-leading encryption and storage systems to ensure that your assets are always safe and secure.</p>
           </div>
         </div>
         <div class="reason-block">
           <div class="reason-content">
             <span class="reason-number">2</span>
-            <h3 class="reason-sub-title">Strong account security</h3>
-            <p class="reason-description">We adhere to the highest security standards and implement the strictest security practices to keep your account secure.</p>
+            <h3 class="reason-sub-title change-language-reasonSub2">Strong account security</h3>
+            <p class="reason-description change-language-reasonDescription2">We adhere to the highest security standards and implement the strictest security practices to keep your account secure.</p>
           </div>
         </div>
         <div class="reason-block">
           <div class="reason-content">
             <span class="reason-number">3</span>
-            <h3 class="reason-sub-title">Trusted app</h3>
-            <p class="reason-description">We have a secure-by-design foundation in place to ensure rapid detection and response to any cyber attacks.</p>
+            <h3 class="reason-sub-title change-language-reasonSub3">Trusted app</h3>
+            <p class="reason-description change-language-reasonDescription3">We have a secure-by-design foundation in place to ensure rapid detection and response to any cyber attacks.</p>
           </div>
         </div>
       </div>
@@ -157,7 +168,7 @@
 
   <section class="partners">
     <div class="container">
-      <h2 class="partners-title section-title">
+      <h2 class="partners-title section-title change-language-partnersTitle">
         Our partners
       </h2>
       <div class="partners-wrap">
@@ -171,7 +182,7 @@
 
   <section class="grow">
     <div class="container">
-      <h2 class="grow-title section-title">
+      <h2 class="grow-title section-title change-language-growTitle">
         Invest and grow your portfolio
       </h2>
       <div class="grow-container">
@@ -194,11 +205,11 @@
           </object>
         </div>
         <div class="disclaimer-text">
-          <h3 class="disclaimer-title">Disclaimer</h3>
-          <p class="disclaimer-description">
+          <h3 class="disclaimer-title change-language-disclaimerTitle">Disclaimer</h3>
+          <p class="disclaimer-description change-language-disclaimerDescription">
             Investment in crypto-assets is unregulated, may not be suitable for retail investors and the entire amount invested may be lost. It is important to read and understand the risks of this investment, which are explained in the "List of Risks" page.
           </p>
-          <a href="./general-risk" class="btn disclaimer-btn">Go to “List of Risks” page</a>
+          <a href="./general-risk" class="btn disclaimer-btn change-language-disclaimerBtn">Go to “List of Risks” page</a>
         </div>
       </div>
     </div>
@@ -208,8 +219,8 @@
     <div class="container">
       <div class="subscribe-wrap">
         <div class="subscribe-text">
-          <h4 class="subscribe-title">Subscribe to our newsletter</h4>
-          <p class="subscribe-description">Receive official updates when you join our mailing list</p>
+          <h4 class="subscribe-title change-language-subscribeTitle">Subscribe to our newsletter</h4>
+          <p class="subscribe-description change-language-subscribeDescription">Receive official updates when you join our mailing list</p>
           <!-- <form action="#" class="subscribe-formm">
             <div class="subscribe-field">
               <label for="subscribeName" class="subscribe-label">Name</label>
@@ -219,7 +230,7 @@
               <label for="subscribeName" class="subscribe-label">Email</label>
               <input id="subscribeName" placeholder="Email" type="email" class="subscribe-input">
             </div> -->
-            <a href="https://t.me/wisy_eng_bot?start=wisy_e" class="subscribe-btn btn" >Subscribe to our newsletter</a>
+            <a href="https://t.me/wisy_eng_bot?start=wisy_e" class="subscribe-btn btn change-language-subscribeBtn" >Subscribe to our newsletter</a>
           </form>
         </div>
         <div class="subscribe-image">
@@ -238,9 +249,9 @@
           </object>
         </a>
         <nav class="header-menu">
-          <li class="header-item"><a href="./" class="header-item-link">Main</a></li>
-          <li class="header-item"><a href="./investors" class="header-item-link">Investors</a></li>
-          <li class="header-item"><a href="./aml" class="header-item-link">Legal</a></li>
+          <li class="header-item"><a href="./" class="header-item-link  change-language-mainLink">Main</a></li>
+          <li class="header-item"><a href="./investors" class="header-item-link  change-language-investorsLink">Investors</a></li>
+          <li class="header-item"><a href="./aml" class="header-item-link  change-language-legalLink">Legal</a></li>
         </nav>
       </div>
       <div class="header-wrap footer-wrap">

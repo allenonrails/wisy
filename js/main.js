@@ -1,3 +1,70 @@
+class MultiLanguage{
+  constructor(config){
+    this.initialize(config);
+  }
+
+  async initialize(config) {
+    this.langs = config.langs
+    this.defaultLanguage = config.defaultLang
+    this.defaultClass = config.classLang
+    this.path = config.path
+    this.select = await document.querySelector(config.selectClass)
+
+    this.disallowParams()
+    await this.loadOptions()
+
+    this.select.addEventListener('change', function(){
+      location.href = `${window.location.pathname}#${this.value}`
+      location.reload()
+    })
+  }
+
+  async loadOptions(){
+    this.langs.forEach(async(name) => {
+      let option = document.createElement('option')
+      option.innerText = name
+      if (window.location.hash.substring(1) === name) option.selected = true 
+      option.value = name 
+
+      await this.select.appendChild(option)
+    }) 
+  }
+
+  changeLanguage() {
+    let hash = window.location.hash.substring(1);
+
+    if(!this.langs.includes(hash)){
+      location.href = `${window.location.pathname}#${this.defaultLanguage}`
+      location.reload()
+
+      return true
+    }
+
+    this.select = hash
+    const investSlider = new InvestSlider(investData[hash])
+
+    this.getJsonData(hash).then(data => {
+      Object.keys(data).forEach(async key => {
+        if (key == "description"){
+          await animationHeroDescription(data[key])
+        }else {
+          document.querySelectorAll(`${this.defaultClass}-${key}`).forEach(el => {
+            el.innerHTML = data[key]
+          })
+        }
+      })
+    })
+  }
+
+  disallowParams(){
+    history.replaceState({}, '', window.location.href.split('?')[0]);
+  }
+
+  async getJsonData(lang){
+    return await(await fetch(`${this.path}/${lang}.json`)).json()
+  }
+}
+
 class Slider {
   constructor(containerSelector, slideSelector, breakPointSlider = 920, autoScrollSpeed = 200) {
     this.sliderContainer = document.querySelector(containerSelector);
@@ -217,36 +284,99 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-const investData = [
-  {
-    imageSrc: './img/invest/1.png',
-    title: 'Invest Easily',
-    description: 'Choose a ready-made strategy, such as «Bitcoin & Ethereum». Link your bank card. And select the frequency of replenishment, for example, 100 $ once a week.',
-    btnLink: 'https://t.me/wisy_eng_bot?start=wisy_e',
-    btnText: 'Get started'
-  },
-  {
-    imageSrc: './img/invest/2.png',
-    title: 'Ready-Made Strategies',
-    description: 'Choose a pre-made strategy and invest automatically, or create your own strategy in just a few clicks within the app.',
-    btnLink: 'https://t.me/wisy_eng_bot?start=wisy_e',
-    btnText: 'Get started'
-  },
-  {
-    imageSrc: './img/invest/3.png',
-    title: 'Free Training',
-    description: 'Learn to save and earn money on cryptocurrency. You will have access to 27 short courses in the form of cards. The average course learning time is 7 minutes.',
-    btnLink: 'https://t.me/wisy_eng_bot?start=wisy_e',
-    btnText: 'Get started'
-  },
-  {
-    imageSrc: './img/invest/4.png',
-    title: 'Simple and stress-free',
-    description: 'No need to speculateand exert a lot of effort to buy cryptocurrency.',
-    btnLink: 'https://t.me/wisy_eng_bot?start=wisy_e',
-    btnText: 'Get started'
-  },
-];
+async function getAllContent(container){
+  result = Array.from( await container.querySelectorAll('.legal-text')).map(p => p.textContent).join('\n')
+
+  return result
+}
+
+function setCurrentPageActiveLink(){
+  let currentPage = `.${window.location.pathname}`;
+  let navLinks    = document.querySelectorAll(".header-item-link");
+
+  navLinks.forEach(function (link) {
+    if (link.getAttribute('href') === currentPage) {
+      link.classList.add('header-item-link-active');
+    }
+  });
+}
+
+async function addChars(descriptionHtml, content) {
+  for (let i = 0; i < content.length; i++) {
+    descriptionHtml.innerHTML += content[i]
+    await sleep(i / 2);
+  }
+}
+
+async function animationHeroDescription(content){
+  let description = document.querySelector('.hero-description');
+  description.innerHTML = ``
+  await addChars(description, content);
+}
+
+const investData = {
+  "en": [
+    {
+      imageSrc: './img/invest/1.png',
+      title: 'Invest Easily',
+      description: 'Choose a ready-made strategy, such as «Bitcoin & Ethereum». Link your bank card. And select the frequency of replenishment, for example, 100 $ once a week.',
+      btnLink: 'https://t.me/wisy_eng_bot?start=wisy_e',
+      btnText: 'Get started'
+    },
+    {
+      imageSrc: './img/invest/2.png',
+      title: 'Ready-Made Strategies',
+      description: 'Choose a pre-made strategy and invest automatically, or create your own strategy in just a few clicks within the app.',
+      btnLink: 'https://t.me/wisy_eng_bot?start=wisy_e',
+      btnText: 'Get started'
+    },
+    {
+      imageSrc: './img/invest/3.png',
+      title: 'Free Training',
+      description: 'Learn to save and earn money on cryptocurrency. You will have access to 27 short courses in the form of cards. The average course learning time is 7 minutes.',
+      btnLink: 'https://t.me/wisy_eng_bot?start=wisy_e',
+      btnText: 'Get started'
+    },
+    {
+      imageSrc: './img/invest/4.png',
+      title: 'Simple and stress-free',
+      description: 'No need to speculateand exert a lot of effort to buy cryptocurrency.',
+      btnLink: 'https://t.me/wisy_eng_bot?start=wisy_e',
+      btnText: 'Get started'
+    },
+  ],
+  "ru": [
+    {
+      imageSrc: './img/invest/1.png',
+      title: 'Инвестируйте без трудностей',
+      description: 'Выберите готовую стратегию, например "Bitcoin & Ethereum". Привяжите к ней свою банковскую карту. И выберите частоту пополнения, например, 100 $ раз в неделю.',
+      btnLink: 'https://t.me/wisy_eng_bot?start=wisy_e',
+      btnText: 'Начать'
+    },
+    {
+      imageSrc: './img/invest/2.png',
+      title: 'Готовые стратегии',
+      description: 'Выберите готовую стратегию и инвестируйте автоматически или создайте свою собственную стратегию всего за несколько кликов в приложении.',
+      btnLink: 'https://t.me/wisy_eng_bot?start=wisy_e',
+      btnText: 'Начать'
+    },
+    {
+      imageSrc: './img/invest/3.png',
+      title: 'Бесплатное обучение',
+      description: 'Научитесь сохранять и зарабатывать на криптовалюте. Вы получите доступ к 27 коротким курсам в виде карточек. Среднее время изучения курса составляет 7 минут.',
+      btnLink: 'https://t.me/wisy_eng_bot?start=wisy_e',
+      btnText: 'Начать'
+    },
+    {
+      imageSrc: './img/invest/4.png',
+      title: 'Простота и отсутствие стресса',
+      description: 'Не нужно спекулировать и прилагать много усилий для покупки криптовалюты.',
+      btnLink: 'https://t.me/wisy_eng_bot?start=wisy_e',
+      btnText: 'Начать'
+    },
+  ]
+
+};
 
 const circleData = [
   [
@@ -305,8 +435,19 @@ const circleData = [
   ],
 ]
 
+const configMulti = {
+  langs: ['en', 'ru'],
+  defaultLang: 'en',
+  classLang: '.change-language',
+  path: './data/languages',
+  selectClass: '.select-langugage'
+}
+
 document.addEventListener('DOMContentLoaded', function(){
-  console.log(navigator.clipboard)
+
+  const multi = new MultiLanguage(configMulti);
+  multi.changeLanguage()
+
   let copyBtns = document.querySelectorAll('.legal-copy');
 
   copyBtns.forEach(copyBtn => {
@@ -318,42 +459,8 @@ document.addEventListener('DOMContentLoaded', function(){
     })
   })
 
-  async function getAllContent(container){
-    result = Array.from( await container.querySelectorAll('.legal-text')).map(p => p.textContent).join('\n')
-
-    return result
-  }
-
-  function setCurrentPageActiveLink(){
-    let currentPage = `.${window.location.pathname}`;
-    let navLinks    = document.querySelectorAll(".header-item-link");
-  
-    navLinks.forEach(function (link) {
-      if (link.getAttribute('href') === currentPage) {
-        link.classList.add('header-item-link-active');
-      }
-    });
-  }
-
-  async function addChars(descriptionHtml, content) {
-    for (let i = 0; i < content.length; i++) {
-      descriptionHtml.innerHTML += content[i]
-      await sleep(i / 2);
-    }
-  }
-
-  async function animationHeroDescription(){
-    let description = document.querySelector('.hero-description');
-    let contentDescription = description.textContent.split('')
-    description.innerHTML = ``
-  
-    await addChars(description, contentDescription);
-  }
-
-  animationHeroDescription()
   setCurrentPageActiveLink()
   const mySlider = new Slider('.guide-slider', '.guide-slide');
-  const investSlider = new InvestSlider(investData)
   const elementCircle = new ElementCircle("circle-1", circleData[0], 1200);
   const elementSecondCircle = new ElementCircle("circle-2", circleData[1], 800);
 
