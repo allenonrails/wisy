@@ -470,6 +470,23 @@ document.addEventListener('DOMContentLoaded', function(){
   }
   if(document.querySelector('.forecast-column')){
     columnForecast()
+    const blocksToAnimate = document.querySelectorAll('.forecast-column');
+    const options = {
+      threshold: 0.3 
+    };
+
+    const observer = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          blocksToAnimate.forEach(el => {
+            el.classList.add('forecast-column-animated');
+          })
+          observer.unobserve(entry.target);
+        }
+      });
+    }, options);
+
+    observer.observe(blocksToAnimate[0].parentElement);
   }
   
   setCurrentPageActiveLink()
