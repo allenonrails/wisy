@@ -16,10 +16,17 @@
           </object>
         </a>
         <nav class="header-menu">
-          <li class="header-item"><a href="./" class="header-item-link">Main</a></li>
-          <li class="header-item"><a href="./investors" class="header-item-link">Investors</a></li>
-          <li class="header-item"><a href="./aml" class="header-item-link">Legal</a></li>
+          <li class="header-item"><a href="./" class="header-item-link change-language-mainLink">Main</a></li>
+          <li class="header-item"><a href="./investors" class="header-item-link change-language-investorsLink">Investors</a></li>
+          <li class="header-item"><a href="./aml" class="header-item-link change-language-legalLink">Legal</a></li>
         </nav>
+        <div class="header-select">
+          <object id="langSvg" type="image/svg+xml" data="./img/lang.svg" width="30" height="30">
+            Your browser does not support SVG
+          </object>
+          <select class="select-langugage">
+          </select>
+        </div>
       </div>
     </div>
   </header>
@@ -67,23 +74,79 @@
     </div>
   </section>
 
-  <section class="disclaimer">
+  <section class="solve">
     <div class="container">
-      <div class="disclaimer-wrap">
-        <div class="disclaimer-image">
-          <object class="disclaimer-image__source" data-url="/" type="image/svg+xml" data="./img/graph.svg">
-            Your browser does not support SVG
-          </object>
+      <h2 class="solve-title section-title">What market problem does <span class="title-green">WISY</span> solve?</h2>
+      <div class="solve-wrap">
+        <div class="solve-block">
+          <h3 class="solve-block__title">Problem:</h3>
+          <p class="solve-block__description">More than 70% of people do not use cryptocurrency because it is complex and confusing
+            (Motley Fool)</p>
         </div>
-        <div class="disclaimer-text">
-          <h3 class="disclaimer-title">WISY</h3>
-          <p class="disclaimer-description">
-            This is an application for automatic investments in ready-made strategies on the cryptocurrency market directly from a bank card.
-          </p>
-          <a href="./wisy.pdf" target="_blank" class="btn disclaimer-btn">Download Pitch Desk</a>
+        <div class="solve-block">
+          <h3 class="solve-block__title">Solution:</h3>
+          <p class="solve-block__description">To make the complex cryptocurrency market simple and profitable for any user, by offering automatic investmentsin ready-made index strategiesdirectly from a bank card.</p>
         </div>
       </div>
     </div>
+  </section>
+
+  <section class="clients">
+    <div class="container">
+      <div class="clients-wrap">
+        <div class="client-block">
+          <h3 class="client-title">
+            <object id="logoLink" data-url="/" type="image/svg+xml" data="./img/investors/clients/client-1.svg" width="50" height="50">
+              Your browser does not support SVG
+            </object>
+            55%</h3>
+          <p class="client-description">of clients own cryptocurrency
+            as part of a long-term investment strategy (Binance Research)</p>
+        </div>
+        <div class="client-block">
+          <h3 class="client-title">
+            <object id="logoLink" data-url="/" type="image/svg+xml" data="./img/investors/clients/client-2.svg" width="50" height="50">
+              Your browser does not support SVG
+            </object>
+            38%</h3>
+          <p class="client-description">of users no longer trust
+            the traditional banking system (Binance Research)</p>
+        </div>
+        <div class="client-block">
+          <h3 class="client-title">
+            <object id="logoLink" data-url="/" type="image/svg+xml" data="./img/investors/clients/client-3.svg" width="50" height="50">
+              Your browser does not support SVG
+            </object>
+            45%</h3>
+          <p class="client-description">of investors aged 18 to 29
+            made their first investments specifically in cryptocurrencies (TripleA)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="forecast">
+    <div class="container">
+      <h2 class="forecast-title section-title">Market forecast - 1 billion cryptocurrency users by 2030  (Binance Research)</h2>
+        <div class="forecast-wrap">
+          <div class="forecast-block" data-size="5" data-date="2017">
+            <span class="forecast-num">5.8 million</span>
+            <div class="forecast-column"></div>
+          </div>
+          <div class="forecast-block" data-size="15" data-date="2020">
+            <span class="forecast-num">101 million</span>
+            <div class="forecast-column"></div>
+          </div>
+          <div class="forecast-block" data-size="30" data-date="2022">
+            <span class="forecast-num">320 million</span>
+            <div class="forecast-column"></div>
+          </div>
+          <div class="forecast-block" data-size="90" data-date="2030">
+            <span class="forecast-num">1 billion</span>
+            <div class="forecast-column"></div>
+          </div>
+        </div>
+      </div>
   </section>
 
   <section id="formRequest" class="subscribe">

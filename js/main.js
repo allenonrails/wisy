@@ -41,7 +41,10 @@ class MultiLanguage{
     }
 
     this.select = hash
-    const investSlider = new InvestSlider(investData[hash])
+    if('' == document.location.pathname){
+      const investSlider = new InvestSlider(investData[hash])
+    }
+    
 
     this.getJsonData(hash).then(data => {
       Object.keys(data).forEach(async key => {
@@ -459,10 +462,21 @@ document.addEventListener('DOMContentLoaded', function(){
     })
   })
 
+  function columnForecast(){
+    document.querySelectorAll('.forecast-column').forEach(el => {
+      let height = el.parentElement.closest('.forecast-wrap').offsetHeight * parseInt(el.parentElement.dataset.size) / 100
+      el.style.height = `${height}px`
+    })
+  }
+  if(document.querySelector('.forecast-column')){
+    columnForecast()
+  }
+  
   setCurrentPageActiveLink()
-  const mySlider = new Slider('.guide-slider', '.guide-slide');
-  const elementCircle = new ElementCircle("circle-1", circleData[0], 1200);
-  const elementSecondCircle = new ElementCircle("circle-2", circleData[1], 800);
-
+  if('' == document.location.pathname){
+    const mySlider = new Slider('.guide-slider', '.guide-slide');
+    const elementCircle = new ElementCircle("circle-1", circleData[0], 1200);
+    const elementSecondCircle = new ElementCircle("circle-2", circleData[1], 800);
+  }
 })
 
