@@ -2136,6 +2136,9 @@ background-color: var(--green);
     max-width: 100%;
     margin: 0 auto;
   }
+  .investors-link {
+    justify-content: center;
+  }
 }
 
 /* metrics */
@@ -2198,4 +2201,8 @@ background-color: var(--green);
   .investors-wrap {
     display: block;
   }
+}
+
+.advisors-wrap {
+  grid-template-rows: none;
 }

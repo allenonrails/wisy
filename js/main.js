@@ -490,7 +490,7 @@ document.addEventListener('DOMContentLoaded', function(){
   }
   
   setCurrentPageActiveLink()
-  if('' == document.location.pathname){
+  if('/' == document.location.pathname){
     const mySlider = new Slider('.guide-slider', '.guide-slide');
     const elementCircle = new ElementCircle("circle-1", circleData[0], 1200);
     const elementSecondCircle = new ElementCircle("circle-2", circleData[1], 800);
