@@ -846,166 +846,240 @@ img {
 }
 
 /* grow */
+@keyframes bake-pie {
+  from {
+    transform: rotate(0deg) translate3d(0,0,0);
+  }
+}
+
+.grow-wrap {
+  display: flex;
+  justify-content: space-between;
+}
 
 .grow-container {
   position: relative;
-  padding: 100px 50px;
-  overflow: hidden;
+  z-index: 2;
 }
 
-.circle {
+.grow-items, .grow-container {
+  width: calc(100% / 12 * 6);
+}
+
+.pieID {
   position: relative;
-  border: 1.5px solid var(--green);
-  margin: 0 auto;
-  border-radius: 50%;
-  animation: rotateCircle 40s linear infinite;
-  z-index: 1;
+  margin-left: 50px;
+  width: 500px;
+  height: 500px;
 }
 
-.inner-circle {
-  position: absolute;
-  border-radius: 50%;
-  top: 17%;
-  left: 17%;
-  animation: rotateCircleReverse 20s linear infinite;
-  z-index: 1;
+.pie {
+  top: 0;
+  left: 0;
+  position: relative;
+  --pie-size: 200px; 
 }
 
-.grow-circle {
+.pie::before {
+  content: "";
+  display: block;
   position: absolute;
-  width: 350px;
-  height: 350px;
-  background-color: var(--green);
+  z-index: 1;
+  width: calc(var(--pie-size) / 2);
+  height: calc(var(--pie-size) / 2);
+  background: #EEE;
   border-radius: 50%;
+  top: calc(var(--pie-size) / 4);
+  left: calc(var(--pie-size) / 4);
+}
+
+.slice {
+  position: absolute;
+  clip: rect(0px, var(--pie-size), var(--pie-size), calc(var(--pie-size) / 2));
+  animation: bake-pie 1s;
+}
+
+.slice span {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #fff;
+  background-color: black;
+  border-radius: 50%;
+  clip: rect(0px, var(--pie-size), var(--pie-size), calc(var(--pie-size) / 2));
+}
+
+
+.legend {
+  max-width: 700px;
+  min-height: 150px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  top: 50%;
-  left: 52%;
-  transform:translate(-50%, -50%); 
-} 
-
-.grow-circle img{
-  max-width: 400px;
-  margin-right: -20px;
+  padding: 0;
+  margin: 0;
+  padding: 15px;
+}
+.legend li {
+  margin-bottom: 0.7em;
+  display: flex;
+  align-items: center;
+  --beforeColor: #000;
+  margin-right: 20px;
+}
+.legend li::before {
+  content: '';
+  width: 27px;
+  height: 13px;
+  border-radius: 20px;
+  background-color: var(--beforeColor);
+  flex-shrink: 0;
+  margin-right: 10px;
+}
+.legend em {
+  font-family: "SF Medium";
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  margin-right: 12px;
+  text-transform: uppercase;
+}
+.legend em img {
+  margin-right: 10px;
+}
+.legend span {
+  font-family: "SF Bold";
+  font-size: 24px;
+  color: var(--beforeColor);
 }
 
-.element {
-  position: absolute;
-  padding: 10px;
+.grow-items {
+  margin-left: 0px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 15px;
+  grid-row-gap: 15px; 
+}
+
+.grow-item {
+  cursor: pointer;
+  opacity: 0.3;
+  align-items: start;
+  width: 150px;
+  flex-shrink: 0;
+  height: 150px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: center;
   background-color: var(--dark);
-  border-radius: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  transition: .6s ease-in-out;
   text-align: center;
 }
 
-.element-title {
-  font-family: "SF Medium";
+.grow-item:hover {
+  opacity: .8;
+}
+
+.grow-item-active {
+  opacity: 1;
+}
+
+.grow-item__text {
+  max-width: 100px;
+  font-family: "SF Bold";
   color: var(--white);
-  margin-top: 10px;
 }
 
-@keyframes rotateCircle {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+.grow-subtitle {
+  font-family: "SF Bold";
+  font-size: 36px;
+  margin-bottom: 30px;
+  text-align: center;
 }
 
-@keyframes rotateCircleReverse {
-  0% { transform: rotate(360deg); }
-  100% { transform: rotate(0deg); }
+@media screen and (max-width: 1300px) {
+  .grow-items {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+  }
 }
 
-@media screen and (max-width: 1228px) {
-  .grow-container {
-    padding: 50px;
+@media screen and (max-width: 971px) {
+  .grow-items {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 7px;
+    grid-row-gap: 7px; 
   }
+  .pieID {
+    position: relative;
+    margin-left: 0px;
+  }
+}
 
-  .grow-circle { 
-    width: 150px;
-    height: 150px;
+@media screen and (max-width: 739px) {
+  .grow-wrap {
+    flex-direction: column-reverse;
   }
-  
-  .grow-circle img{
-    max-width: 200px;
-    margin-right: -20px;
+  .grow-items, .grow-container {
+    width: 100%;
   }
-
-  .element {
-    padding: 5px;
+  .grow-item {
+    width: 120px;
+    height: 120px;
   }
-
-  .element img {
-    max-width: 50px;
-  }
-
-  .element-title {
-    font-family: "SF Medium";
-    color: var(--white);
+  .grow-item__text {
     font-size: 10px;
-    margin-top: 3px;
   }
-  
-}
-
-@media screen and (max-width: 676px) {
-  .grow-container {
-    padding: 30px 10px;
+  .grow-items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
   }
-
-  .grow-circle { 
-    width: 70px;
-    height: 70px;
-  }
-  
-  .grow-circle img{
-    max-width: 80px;
-    margin-left: -15px;
-  }
-
-  .element {
-    padding: 5px;
-    background: transparent;
-  }
-
-  .element img {
-    max-width: 40px;
-  }
-
-  .element-title {
-    display: none;
-  }
-  
-}
-
-@media screen and (max-width: 380px) {
-  .grow-container {
-    padding: 20px 0;
-  }
-
-  .inner-circle {
-    top: 20%;
-    left: 20%;
-  }
-  .grow-circle { 
-    width: 50px;
-    height: 50px;
-  }
-  
-  .grow-circle img{
-    max-width: 60px;
-    margin-left: -17px;
-  }
-  .element-title {
-    width: 70px;
-    border-radius: 5px;
-    color: var(--white);
-    background-color: var(--dark);
-    font-size: 8px;
+  .pieID.pie {
+    margin-left: 22%;
   }
 }
+
+@media screen and (max-width: 589px) {
+  .pieID.pie {
+    margin-left: 22px;
+  }
+  .legend {
+    display: flex;
+    padding: 0;
+    padding-left: 10px;
+  }
+  .legend li {
+    display: block;
+    max-width: 50px;
+    text-align: center;
+  }
+  .legend em img {
+    margin-right: 0;
+  }
+  .legend em {
+    font-family: "SF Medium";
+    font-size: 12px;
+    display: block;
+    align-items: center;
+    margin-right: 8px;
+  }
+}
+
+@media screen and (max-width: 342px) {
+  .pieID.pie {
+    margin-left: -5px;
+  }
+}
+
 
 /* disclaimer */
 

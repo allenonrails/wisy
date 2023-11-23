@@ -41,7 +41,7 @@ class MultiLanguage{
     }
 
     this.select = hash
-    if('' == document.location.pathname){
+    if('/' == document.location.pathname){
       const investSlider = new InvestSlider(investData[hash])
     }
     
@@ -188,100 +188,104 @@ class InvestSlider {
   }
 }
 
-class ElementCircle {
-  constructor(circleId, data, circleSize=1000, elementSize=150) {
-    this.circle = document.getElementById(circleId);
-    this.circleSize = circleSize;
-    this.elementSize = elementSize;
-    this.data = data;
-    this.elements = [];
+class PieChart {
+  constructor(dataElement, pieElement, pieSize, data) {
+    this.dataElement = dataElement;
+    this.pieElement = pieElement;
+    this.pieSize = pieSize;
+    this.data = data
+    this.colors = data.map(coin => coin.color)
 
-    this.initCircle();
-    this.updateSizes(); // Вызываем метод для установки размеров при загрузке страницы
-  }
-
-  initCircle() {
-    this.circle.style.width = `${this.circleSize}px`;
-    this.circle.style.height = `${this.circleSize}px`;
-
-    // Добавляем внутренний круг
-    const innerCircle = document.createElement("div");
-    innerCircle.className = "inner-circle";
-    this.circle.appendChild(innerCircle);
-
-    this.data.forEach((dataCircle, i) => {
-      let element = document.createElement("div");
-      let image   = document.createElement('img');
-      let title   = document.createElement('h4')
-
-      image.src = dataCircle.imageSrc
-      image.alt = dataCircle.imageAlt
-      image.loading = "lazy"
-
-      title.innerText = dataCircle.title
-      title.classList.add('element-title')
-
-      element.className = "element";
-      element.style.width = `${this.elementSize}px`
-      element.style.height = `${this.elementSize}px`
-
-      element.appendChild(image)
-      element.appendChild(title)
-      element.style.animationDelay = `${(i / this.data.length) * 5}s`;
-      this.circle.appendChild(element);
-      this.elements.push(element);
-    })
-
-    this.positionElements();
-  }
-
-  positionElements() {
-    this.elements.forEach((element, index) => {
-      const angle = (360 / this.data.length) * index;
-      const x = this.circleSize / 2 + (this.circleSize / 2) * Math.cos(this.toRadians(angle));
-      const y = this.circleSize / 2 + (this.circleSize / 2) * Math.sin(this.toRadians(angle));
-
-      element.style.left = `${x - this.elementSize / 2}px`;
-      element.style.top = `${y - this.elementSize / 2}px`;
-    });
-  }
-
-  updateSizes() {
     const screenWidth = window.innerWidth;
 
     if (screenWidth <= 1228) {
-      this.circleSize /= 1.5;
-      this.elementSize /= 1.5;
-    }
-
-    if (screenWidth <= 676) {
-      this.circleSize /= 2.2;
-      this.elementSize /= 2.2;
+      this.pieSize /= 1.2;
+      this.pieSize /= 1.2;
     }
 
     if (screenWidth <= 380) {
-      this.circleSize -= 70;
-      this.elementSize -= 30;
+      this.pieSize -= 20;
+      this.pieSize -= 20;
     }
-    
 
-    // Обновляем размеры кругов
-    this.circle.style.width = `${this.circleSize}px`;
-    this.circle.style.height = `${this.circleSize}px`;
-
-    // Обновляем размеры элементов
-    this.elements.forEach((element) => {
-      element.style.width = `${this.elementSize}px`;
-      element.style.height = `${this.elementSize}px`;
-    });
-
-    this.positionElements();
   }
 
-  toRadians(degrees) {
-    return degrees * (Math.PI / 180);
+  sliceSize(dataNum, dataTotal) {
+    return (dataNum / dataTotal) * 360;
+  }
+
+  addSlice(sliceSize, offset, sliceID, color, text) {
+    const slice = document.createElement("div");
+    slice.className = `slice ${sliceID}`;
+    slice.innerHTML = `<span>${text}</span>`;
+    document.querySelector(this.pieElement).appendChild(slice);
+
+    offset -= 1;
+    const sizeRotation = -179 + sliceSize;
+
+    document.querySelector(`.${sliceID}`).style.transform = `rotate(${offset}deg) translate3d(0,0,0)`;
+    document.querySelector(`.${sliceID} span`).style.transform = `rotate(${sizeRotation}deg) translate3d(0,0,0)`;
+    document.querySelector(`.${sliceID} span`).style.backgroundColor = color;
+
+    // Set slice size dynamically
+    slice.style.width = `${this.pieSize}px`;
+    slice.style.height = `${this.pieSize}px`;
+    slice.style.clip = `rect(0px, ${this.pieSize}px, ${this.pieSize}px, ${this.pieSize / 2}px)`;
+    document.querySelector(`.${sliceID} span`).style.width = `${this.pieSize}px`;
+    document.querySelector(`.${sliceID} span`).style.height = `${this.pieSize}px`;
+    document.querySelector(`.${sliceID} span`).style.clip = `rect(0px, ${this.pieSize}px, ${this.pieSize}px, ${this.pieSize / 2}px)`;
+  }
+
+  iterateSlices(sliceSize, offset, dataCount, sliceCount, color, text) {
+    const sliceID = `s${dataCount}-${sliceCount}`;
+    const maxSize = 179;
+
+    if (sliceSize <= maxSize) {
+      this.addSlice(sliceSize, offset, sliceID, color, text);
+    } else {
+      this.addSlice(maxSize, offset, sliceID, color, text);
+      this.iterateSlices(sliceSize - maxSize, offset + maxSize, dataCount, sliceCount + 1, color, text);
+    }
+  }
+
+  createPie() {
+    let listData = Array.from(this.data, coinData => Number(coinData.percent));
+    const listTotal = listData.reduce((acc, val) => acc + val, 0);
+    let offset = 0;
+
+    const legend = document.querySelector('.legend')
+    legend.innerHTML = ``
+
+    this.data.forEach((coinData, index) => {
+      const size = this.sliceSize(coinData.percent, listTotal);
+      this.iterateSlices(size, offset, index, 0, coinData.color, `${coinData.percent}`)
+      
+      let img = document.createElement('img')
+      img.src = coinData.imgPath
+      img.alt = `${coinData.name.toLowerCase()} icon`
+
+      let li = document.createElement('li')
+      let em = document.createElement('em')
+      let span = document.createElement('span')
+
+      li.style.setProperty('--beforeColor', coinData.color);
+
+      span.innerText = `${coinData.percent}%`
+
+      em.appendChild(img);
+      em.innerHTML += coinData.name
+
+      li.appendChild(em)
+      li.appendChild(span)
+      legend.appendChild(li)
+
+      offset += size;
+    })
+
+    document.querySelector(this.pieElement).style.setProperty('--pie-size', `${this.pieSize}px`);
   }
 }
+
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -316,6 +320,46 @@ async function animationHeroDescription(content){
   description.innerHTML = ``
   await addChars(description, content);
 }
+
+function loadGrow(){
+  const growItemsWrap = document.querySelector('.grow-items');
+
+  growData.forEach((data, index) => {
+    let growItem = document.createElement('div')
+    growItem.classList.add('grow-item')
+    if(index === 0) growItem.classList.add('grow-item-active')
+
+    let h4 = document.createElement('h4')
+    h4.classList.add('grow-item__text')
+    h4.innerText = data.title
+
+    let img = document.createElement('img')
+    img.loading = 'lazy'
+    img.src = data.imageSrc
+    img.alt = data.imageAlt
+
+    growItem.addEventListener('click', function(){
+      loadActiveGrow(data, growItem)
+    })
+
+    growItem.appendChild(h4)
+    growItem.appendChild(img)
+    growItemsWrap.appendChild(growItem)
+  })
+}
+
+function loadActiveGrow(data, growItem){
+  document.querySelector('.grow-subtitle').innerText = data.title
+
+  document.querySelectorAll(".grow-item").forEach(el => el.classList.remove('grow-item-active'))
+
+  growItem.classList.add("grow-item-active")
+
+  document.querySelector('.pieID.pie').innerHTML = ``
+  let pieChart = new PieChart(".legend", ".pieID.pie", 500, data.data.coins);
+  pieChart.createPie();
+}
+
 
 const investData = {
   "en": [
@@ -381,61 +425,339 @@ const investData = {
 
 };
 
-const circleData = [
-  [
-    {
-      imageSrc: "./img/grow/1.png", 
-      imageAlt: "Top-10 market logo",
-      title: "Top-10 market"
-    },
-    {
-      imageSrc: "./img/grow/2.png", 
-      imageAlt: "Top DeFi logo",
-      title: "Top DeFi"
-    },
-    {
-      imageSrc: "./img/grow/3.png", 
-      imageAlt: "Mem-index logo",
-      title: "Mem-index"
-    },
-    {
-      imageSrc: "./img/grow/4.png", 
-      imageAlt: "Top-3 market logo",
-      title: "Top-3 market"
-    },
-    {
-      imageSrc: "./img/grow/9.png", 
-      imageAlt: "Only Bitcoin logo",
-      title: "Only Bitcoin"
-    },
-  ],
-  [
-    {
-      imageSrc: "./img/grow/5.png", 
-      imageAlt: "POW-index logo",
-      title: "POW-index"
-    },
-    {
-      imageSrc: "./img/grow/6.png", 
-      imageAlt: "BTC & ETH logo",
-      title: "BTC & ETH"
-    },
-    {
-      imageSrc: "./img/grow/7.png", 
-      imageAlt: "L2-index logo",
-      title: "L2-index"
-    },
-    {
-      imageSrc: "./img/grow/8.png", 
-      imageAlt: "Only Ethereum logo",
-      title: "Only Ethereum market"
-    },
-    {
-      imageSrc: "./img/grow/10.png", 
-      imageAlt: "POS-index logo",
-      title: "POS-index market"
-    },
-  ],
+const growData = [
+  {
+    imageSrc: "./img/grow/1.png", 
+    imageAlt: "Top-10 market logo",
+    title: "Top-10 market",
+    data: {
+      coins: [
+        {
+          name: 'Bitcoin',
+          percent: 15,
+          color: "#F9AA4A",
+          imgPath: './img/grow/coins/bitcoin.svg'
+        },
+        {
+          name: 'Ethereum',
+          color: "#627EEA",
+          percent: 15,
+          imgPath: './img/grow/coins/ethereum.svg'
+        },
+        {
+          name: 'SOL',
+          color: "#0F0338",
+          percent: 10,
+          imgPath: './img/grow/coins/sol.svg'
+        },
+        {
+          name: 'MATIC',
+          color: "#7E3DE1",
+          percent: 10,
+          imgPath: './img/grow/coins/matic.svg'
+        },
+        {
+          name: 'TON',
+          color: "#08C",
+          percent: 10,
+          imgPath: './img/grow/coins/ton.svg'
+        },
+        {
+          name: 'XRP',
+          color: "#23292F",
+          percent: 10,
+          imgPath: './img/grow/coins/xrp.svg'
+        },
+        {
+          name: 'TRX',
+          color: "#EF0027",
+          percent: 10,
+          imgPath: './img/grow/coins/trx.svg'
+        },
+        {
+          name: 'BNB',
+          color: "#F3BA2F",
+          percent: 10,
+          imgPath: './img/grow/coins/bnb.svg'
+        },
+        {
+          name: 'ADA',
+          color: "#5798F4",
+          percent: 10,
+          imgPath: './img/grow/coins/ada.svg'
+        },
+        {
+          name: 'LTC',
+          color: "#345D9D",
+          percent: 5,
+          imgPath: './img/grow/coins/ltc.svg'
+        },
+      ],
+    }
+  },
+  {
+    imageSrc: "./img/grow/2.png", 
+    imageAlt: "Top DeFi logo",
+    title: "Top DeFi",
+    data: {
+      coins: [
+        {
+          name: 'Link',
+          percent: 20,
+          color: "#335DD2",
+          imgPath: './img/grow/coins/link.svg'
+        },
+        {
+          name: 'LDO',
+          color: "#EA8B86",
+          percent: 20,
+          imgPath: './img/grow/coins/ldo.svg'
+        },
+        {
+          name: 'COMP',
+          color: "#00D395",
+          percent: 15,
+          imgPath: './img/grow/coins/comp.svg'
+        },
+        {
+          name: 'AAVE',
+          color: "#7E3DE1",
+          percent: 15,
+          imgPath: './img/grow/coins/aave.svg'
+        },
+        {
+          name: 'FTM',
+          color: "#1969FF",
+          percent: 15,
+          imgPath: './img/grow/coins/ftm.svg'
+        },
+        {
+          name: 'MKR',
+          color: "#54AEA1",
+          percent: 15,
+          imgPath: './img/grow/coins/xrp.svg'
+        },
+
+      ],
+    }
+  },
+  {
+    imageSrc: "./img/grow/3.png", 
+    imageAlt: "Mem-index logo",
+    title: "Mem-index",
+    data: {
+      coins: [
+        {
+          name: 'Doge',
+          percent: 40,
+          color: "#BA9F33",
+          imgPath: './img/grow/coins/doge.svg'
+        },
+        {
+          name: 'Shib',
+          color: "#ED4A35",
+          percent: 30,
+          imgPath: './img/grow/coins/shib.svg'
+        },
+        {
+          name: 'PEPE',
+          color: "#3D8130",
+          percent: 30,
+          imgPath: './img/grow/coins/pepe.svg'
+        },
+      ],
+    }
+  },
+  {
+    imageSrc: "./img/grow/4.png", 
+    imageAlt: "Top-3 market logo",
+    title: "Top-3 market",
+    data: {
+      coins: [
+        {
+          name: 'Bitcoin',
+          percent: 50,
+          color: "#F9AA4A",
+          imgPath: './img/grow/coins/bitcoin.svg'
+        },
+        {
+          name: 'Ethereum',
+          color: "#627EEA",
+          percent: 30,
+          imgPath: './img/grow/coins/ethereum.svg'
+        },
+        {
+          name: 'XRP',
+          color: "#23292F",
+          percent: 20,
+          imgPath: './img/grow/coins/xrp.svg'
+        },
+      ],
+    }
+  },
+  {
+    imageSrc: "./img/grow/9.png", 
+    imageAlt: "Only Bitcoin logo",
+    title: "Only Bitcoin",
+    data: {
+      coins: [
+        {
+          name: 'Bitcoin',
+          percent: 100,
+          color: "#F9AA4A",
+          imgPath: './img/grow/coins/bitcoin.svg'
+        },
+      ],
+    }
+  },
+  {
+    imageSrc: "./img/grow/5.png", 
+    imageAlt: "POW-index logo",
+    title: "POW-index",
+    data: {
+      coins: [
+        {
+          name: 'Bitcoin',
+          percent: 40,
+          color: "#F9AA4A",
+          imgPath: './img/grow/coins/bitcoin.svg'
+        },
+        {
+          name: 'LTC',
+          color: "#345D9D",
+          percent: 15,
+          imgPath: './img/grow/coins/ltc.svg'
+        },
+        {
+          name: 'Doge',
+          percent: 15,
+          color: "#BA9F33",
+          imgPath: './img/grow/coins/doge.svg'
+        },
+        {
+          name: 'KAS',
+          percent: 10,
+          color: "#70C9BB",
+          imgPath: './img/grow/coins/kas.svg'
+        },
+        {
+          name: 'XMR',
+          percent: 10,
+          color: "#FA6800",
+          imgPath: './img/grow/coins/xmr.svg'
+        },
+        {
+          name: 'BCH',
+          percent: 10,
+          color: "#0AC18E",
+          imgPath: './img/grow/coins/bch.svg'
+        },
+      ],
+    }
+  },
+  {
+    imageSrc: "./img/grow/6.png", 
+    imageAlt: "BTC & ETH logo",
+    title: "BTC & ETH",
+    data: {
+      coins: [
+        {
+          name: 'Bitcoin',
+          percent: 50,
+          color: "#F9AA4A",
+          imgPath: './img/grow/coins/bitcoin.svg'
+        },
+        {
+          name: 'Ethereum',
+          color: "#627EEA",
+          percent: 50,
+          imgPath: './img/grow/coins/ethereum.svg'
+        },
+      ],
+    }
+  },
+  {
+    imageSrc: "./img/grow/7.png", 
+    imageAlt: "L2-index logo",
+    title: "L2-index",
+    data: {
+      coins: [
+        {
+          name: 'ARB',
+          percent: 30,
+          color: "#213147",
+          imgPath: './img/grow/coins/arb.svg'
+        },
+        {
+          name: 'OP',
+          color: "#FF0420",
+          percent: 15,
+          imgPath: './img/grow/coins/op.svg'
+        },
+        {
+          name: 'MATIC',
+          color: "#7E3DE1",
+          percent: 40,
+          imgPath: './img/grow/coins/matic.svg'
+        },
+
+      ],
+    }
+  },
+  {
+    imageSrc: "./img/grow/8.png", 
+    imageAlt: "Only Ethereum logo",
+    title: "Only Ethereum market",
+    data: {
+      coins: [
+        {
+          name: 'Ethereum',
+          color: "#627EEA",
+          percent: 100,
+          imgPath: './img/grow/coins/ethereum.svg'
+        },
+      ],
+    }
+  },
+  {
+    imageSrc: "./img/grow/10.png", 
+    imageAlt: "POS-index logo",
+    title: "POS-index market",
+    data: {
+      coins: [
+        {
+          name: 'Ethereum',
+          color: "#627EEA",
+          percent: 40,
+          imgPath: './img/grow/coins/ethereum.svg'
+        },
+        {
+          name: 'SOL',
+          color: "#0F0338",
+          percent: 10,
+          imgPath: './img/grow/coins/sol.svg'
+        },
+        {
+          name: 'MATIC',
+          color: "#7E3DE1",
+          percent: 20,
+          imgPath: './img/grow/coins/matic.svg'
+        },
+        {
+          name: 'TON',
+          color: "#08C",
+          percent: 10,
+          imgPath: './img/grow/coins/ton.svg'
+        },
+        {
+          name: 'ADA',
+          color: "#5798F4",
+          percent: 10,
+          imgPath: './img/grow/coins/ada.svg'
+        },
+      ],
+    }
+  }
 ]
 
 const configMulti = {
@@ -491,9 +813,11 @@ document.addEventListener('DOMContentLoaded', function(){
   
   setCurrentPageActiveLink()
   if('/' == document.location.pathname){
+
+    loadGrow();
+    let pieChart = new PieChart(".legend", ".pieID.pie", 500, growData[0].data.coins);
+    pieChart.createPie();
     const mySlider = new Slider('.guide-slider', '.guide-slide');
-    const elementCircle = new ElementCircle("circle-1", circleData[0], 1200);
-    const elementSecondCircle = new ElementCircle("circle-2", circleData[1], 800);
   }
 })
 
