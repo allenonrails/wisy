@@ -73,6 +73,12 @@ img {
   }
 }
 
+@media screen and (max-width: 420px) {
+  .section-title {
+    font-size: 26px;
+  }
+}
+
 .container {
   width: 100%;
   max-width: 1400px; 
@@ -349,6 +355,7 @@ img {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding-bottom: 60px;
 }
 
 .hero-title {
@@ -374,6 +381,21 @@ img {
 .hero-down {
   display: block;
   margin: 0 auto;
+}
+
+@media screen and (max-width: 1084px) {
+  .hero-wrap {
+    flex-wrap: wrap;
+    text-align: center;
+  }
+  .hero-description {
+    margin: 0 auto;
+  }
+  .hero-btn {
+    margin: 0 auto;
+    margin-top: 60px;
+    width: 200px;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -412,17 +434,11 @@ img {
 
   .hero-title {
     margin-top: 20px;
-    font-size: 44px;
+    font-size: 28px;
   }
 
   .hero-description {
     font-size: 20px;
-  }
-
-  .hero-btn {
-    margin: 0 auto;
-    margin-top: 60px;
-    width: 200px;
   }
 
   .hero-down {
@@ -2280,3 +2296,77 @@ background-color: var(--green);
 .advisors-wrap {
   grid-template-rows: none;
 }
+
+/* mobile-menu */
+
+.mobile-menu {
+  display: none;
+  z-index: 999;
+  background-color: #1A1D28;
+  padding-top: 50px;
+  padding-bottom: 20px;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+}
+
+.mobile-list {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.mobile-item-logo {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform:translate(-50%, -50%); 
+}
+
+.mobile-item {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.mobile-item object {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 7px;
+  pointer-events: none;
+  position: relative; 
+}
+
+.mobile-link {
+  font-size: 16px;
+}
+
+.mobile-menu {}
+
+@media screen and (max-width: 520px) {
+  .header {
+    display: none;
+  }
+  .footer {
+    display: block;
+    padding-bottom: 200px;
+  }
+  .mobile-menu {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: block;
+  }
+  .select-langugage {
+    padding: 5px;
+    color: var(--white);
+    font-size: 16px !important;
+    background: transparent;
+    text-transform: uppercase;
+    -webkit-appearance: none;
+    outline: none;
+    border: none;
+  
+  }
+}
+

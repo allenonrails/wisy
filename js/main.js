@@ -10,6 +10,12 @@ class MultiLanguage{
     this.path = config.path
     this.select = await document.querySelector(config.selectClass)
 
+    const screenWidth = window.innerWidth;
+
+    if (screenWidth <= 520) {
+      this.select = await document.querySelector('.mobile-select')
+    }
+
     this.disallowParams()
     await this.loadOptions()
 
@@ -48,9 +54,12 @@ class MultiLanguage{
 
     this.getJsonData(hash).then(data => {
       Object.keys(data).forEach(async key => {
-        if (key == "description"){
+        if (key == "description" && '/' == document.location.pathname){
           await animationHeroDescription(data[key])
-        }else {
+        }else if (key == "investorsPageDescription" && '/' != document.location.pathname) {
+          await animationHeroDescription(data[key])
+        }
+        else {
           document.querySelectorAll(`${this.defaultClass}-${key}`).forEach(el => {
             el.innerHTML = data[key]
           })
