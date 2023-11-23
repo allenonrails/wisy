@@ -365,7 +365,7 @@ function loadActiveGrow(data, growItem){
   growItem.classList.add("grow-item-active")
 
   document.querySelector('.pieID.pie').innerHTML = ``
-  let pieChart = new PieChart(".legend", ".pieID.pie", 500, data.data.coins);
+  let pieChart = new PieChart(".legend", ".pieID.pie", 380, data.data.coins);
   pieChart.createPie();
 }
 
@@ -824,7 +824,7 @@ document.addEventListener('DOMContentLoaded', function(){
   if('/' == document.location.pathname){
 
     loadGrow();
-    let pieChart = new PieChart(".legend", ".pieID.pie", 500, growData[0].data.coins);
+    let pieChart = new PieChart(".legend", ".pieID.pie", 380, growData[0].data.coins);
     pieChart.createPie();
     const mySlider = new Slider('.guide-slider', '.guide-slide');
   }

@@ -884,7 +884,7 @@ img {
 
 .pieID {
   position: relative;
-  margin-left: 50px;
+  margin-left: 100px;
   width: 500px;
   height: 500px;
 }
@@ -925,7 +925,6 @@ img {
   border-radius: 50%;
   clip: rect(0px, var(--pie-size), var(--pie-size), calc(var(--pie-size) / 2));
 }
-
 
 .legend {
   max-width: 700px;
@@ -1060,13 +1059,13 @@ img {
     margin-bottom: 40px;
   }
   .pieID.pie {
-    margin-left: 22%;
+    margin-left: 33%;
   }
 }
 
 @media screen and (max-width: 589px) {
   .pieID.pie {
-    margin-left: 22px;
+    margin-left: 22%;
   }
   .legend {
     display: flex;
@@ -1090,9 +1089,9 @@ img {
   }
 }
 
-@media screen and (max-width: 342px) {
+@media screen and (max-width: 380px) {
   .pieID.pie {
-    margin-left: -5px;
+    margin-left: 35px;
   }
 }
 
