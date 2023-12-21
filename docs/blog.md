@@ -71,12 +71,21 @@ A robust Content Management System (CMS) should be implemented to enable easy ar
 - **Functionality:**
   - Ensure that only authorized users can perform actions such as creating, editing, and deleting articles, categories, and tags.
 
-## 2.7.3 User Interface (UI) and Experience (UX)
+## 2.7.3 User Profile
 
-### 5. Responsive Design
+### 5. User Profile
+- **Details:**
+  - User profile is mandatory for all registered users.
+  - Fields include:
+    - Description
+    - Name
+    - Social media links
+    - Email address
+
+### 6. Responsive Design
 - **Requirement:**
   - Ensure that the application is responsive across various devices and screen sizes.
 
-### 6. Intuitive UI
+### 7. Intuitive UI
 - **Guideline:**
-  - Design an intuitive and user-friendly interface for managing articles, categories, and tags.
+  - Design an intuitive and user-friendly interface for managing articles, categories, tags, and user profiles.
